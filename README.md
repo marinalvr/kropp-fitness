@@ -1,3 +1,3 @@
-# kropp-fitness
-Kropp fitness club website
+# Kropp Fitness
+Kropp fitness club test website
 https://marinalvr.github.io/kropp-fitness/
