@@ -22,36 +22,25 @@
   font-display: swap;
 }
 
-/**
-  Нормализация блочной модели
- */
+/* Нормализация блочной модели */
 *,
 ::before,
 ::after {
   box-sizing: border-box;
 }
 
-/**
-  Убираем внутренние отступы слева тегам списков,
-  у которых есть атрибут class
-*/
+/* Убираем внутренние отступы слева тегам списков, у которых есть атрибут class */
 :where(ul, ol):where([class]) {
   padding-left: 0;
 }
 
-/**
-  Убираем внешние отступы body и двум другим тегам,
-  у которых есть атрибут class
-*/
+/* Убираем внешние отступы body и двум другим тегам, у которых есть атрибут class */
 body,
 :where(blockquote, figure):where([class]) {
   margin: 0;
 }
 
-/**
-  Убираем внешние отступы вертикали нужным тегам,
-  у которых есть атрибут class
-*/
+/* Убираем внешние отступы вертикали нужным тегам, у которых есть атрибут class*/
 :where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
   margin-block: 0;
 }
@@ -66,10 +55,7 @@ body,
   border: none;
 }
 
-/**
-  Убираем стандартный маркер маркированному списку,
-  у которого есть атрибут class
-*/
+/* Убираем стандартный маркер маркированному списку, у которого есть атрибут class */
 :where(ul[class]) {
   list-style: none;
 }
@@ -78,37 +64,26 @@ body,
   font-style: normal;
 }
 
-/**
-  Обнуляем вертикальные внешние отступы параграфа,
-  объявляем локальную переменную для внешнего отступа вниз,
-  чтобы избежать взаимодействие с более сложным селектором
-*/
+/* Обнуляем вертикальные внешние отступы параграфа, объявляем локальную переменную для внешнего отступа вниз, чтобы избежать взаимодействие с более сложным селектором */
 p {
   --paragraphMarginBottom: 24px;
 
   margin-block: 0;
 }
 
-/**
-  Внешний отступ вниз для параграфа без атрибута class,
-  который расположен не последним среди своих соседних элементов
-*/
+/* Внешний отступ вниз для параграфа без атрибута class,  который расположен не последним среди своих соседних элементов */
 p:where(:not([class]):not(:last-child)) {
   margin-bottom: var(--paragraphMarginBottom);
 }
 
 
-/**
-  Упрощаем работу с изображениями
-*/
+/* Упрощаем работу с изображениями */
 img {
   display: block;
   max-width: 100%;
 }
 
-/**
-  Наследуем свойства шрифт для полей ввода
-*/
+/* Наследуем свойства шрифт для полей ввода */
 input,
 textarea,
 select,
@@ -116,11 +91,19 @@ button {
   font: inherit;
 }
 
+/* Убираем стрелки на числовых input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Пригодится в большинстве ситуаций (когда, например, нужно будет "прижать" футер к низу сайта) */
 html {
-  /**
-    Пригодится в большинстве ситуаций
-    (когда, например, нужно будет "прижать" футер к низу сайта)
-  */
   height: 100%;
 }
 
@@ -132,21 +115,14 @@ html,
   scroll-behavior: smooth;
 }
 
+/* Пригодится в большинстве ситуаций (когда, например, нужно будет "прижать" футер к низу сайта) */
 body {
-  /**
-    Пригодится в большинстве ситуаций
-    (когда, например, нужно будет "прижать" футер к низу сайта)
-  */
   min-height: 100%;
-  /**
-    Унифицированный интерлиньяж
-  */
+  /* Унифицированный интерлиньяж */
   line-height: 1.5;
 }
 
-/**
-  Приводим к единому цвету svg-элементы
-*/
+/* Приводим к единому цвету svg-элементы */
 svg *[fill] {
   fill: currentColor
 }
@@ -155,17 +131,12 @@ svg *[stroke] {
   stroke: currentColor
 }
 
-/**
-  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
-*/
+/* Чиним баг задержки смены цвета при взаимодействии с svg-элементами */
 svg * {
   transition-property: fill, stroke;
 }
 
-/**
-  Удаляем все анимации и переходы для людей,
-  которые предпочитают их не использовать
-*/
+/* Удаляем все анимации и переходы для людей, которые предпочитают их не использовать */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -378,7 +349,8 @@ h6 {
   color: var(--color-light);
 }
 
-.input::placeholder {
+.input::placeholder,
+select.input {
   color: var(--color-light-gray);
 }
 
@@ -756,6 +728,89 @@ background-color: var(--color-darken-gray);
 
 .family-image {
   scroll-snap-align: start;
+}
+
+.calculate {
+  padding-block: 146px;
+  background-color: var(--color-darken-gray);
+}
+
+.calculate-inner {
+  display: flex;
+  align-items: center;
+  column-gap: 36px;
+}
+
+.calculate-body {
+  flex-grow: 1;
+  max-width: 627px;
+}
+
+.calculate-title:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.calculate-description {
+  max-width: 385px;
+}
+
+.calculate-description:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.calculate-form-body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 30px;
+}
+
+.calculate-form-body:not(:last-child) {
+  margin-bottom: 26px;
+}
+
+.calculate-input.wide {
+  grid-column: -1 / 1;
+}
+
+.calculate-table-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 610px;
+}
+
+.calculate-table-wrapper::before {
+  content:'';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: var(--color-dark);
+  border-radius: 50%;
+}
+
+.calculate-table {
+  position: relative;
+  border-collapse: collapse;
+}
+
+.calculate-table th {
+  padding-block: 20px;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--color-light);
+}
+
+.calculate-table td {
+  padding-block: 14px;
+}
+
+.calculate-table tfoot td {
+  
 }
 
 @media (max-width: 1919px) {
